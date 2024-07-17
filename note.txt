@@ -1,0 +1,49 @@
+nest new .
+npm i nestjs-telegraf
+npm i telegraf
+npm i --save @nestjs/config
+npm install --save @nestjs/sequelize sequelize sequelize-typescript pg
+npm i telegraf-session-local
+
+
+
+
+
+
+-----------------------------
+npm init -y
+tsc --init
+
+
+npm i telegraf-session-local
+
+npm i @nestjs/core
+npm i @nestjs/common
+npm i @nestjs/config
+
+
+
+
+
+
+
+
+
+
+-------------------
+
+npm init -y
+tsc --init
+npm init @eslint/config
+
+npm i -D typescript
+npm i -D @types/node
+
+## зависимости
+
+npm i telegraf dotenv
+npm i -D @types/dotenv
+
+
+
+
