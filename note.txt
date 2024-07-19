@@ -5,7 +5,7 @@ npm i --save @nestjs/config
 npm install --save @nestjs/sequelize sequelize sequelize-typescript pg
 npm i telegraf-session-local
 
-
+pm2 start --name tp_bot_backend_nestjs npm -- start
 
 
 
@@ -47,3 +47,6 @@ npm i -D @types/dotenv
 
 
 
+update users_tg_access
+set "userTgId"=1
+where id=1

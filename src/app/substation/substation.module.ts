@@ -6,17 +6,17 @@ import { SubstationUpdate } from './substation.update';
 import { Substation } from './substation.model';
 import { SubstationDeleteScene } from './scenes/substation-delete.scene';
 import { SubstationAddScene } from './scenes/substation-add.scene';
-import { UserTg, UserTgService, UserTgAccess } from '../user-tg';
+import { UserTgModule } from '../user-tg';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Substation, UserTg, UserTgAccess])],
+  imports: [UserTgModule, SequelizeModule.forFeature([Substation])],
   controllers: [SubstationController],
   providers: [
     SubstationUpdate,
     SubstationService,
     SubstationAddScene,
     SubstationDeleteScene,
-    UserTgService,
   ],
+  exports: [SubstationService],
 })
 export class SubstationModule {}

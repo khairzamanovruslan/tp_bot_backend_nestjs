@@ -12,5 +12,6 @@ import { UserTgDeleteScene } from './scenes/user-tg-delete.scene';
   imports: [SequelizeModule.forFeature([UserTg, UserTgAccess])],
   controllers: [UserTgController],
   providers: [UserTgUpdate, UserTgService, UserTgAddScene, UserTgDeleteScene],
+  exports: [UserTgService],
 })
 export class UserTgModule {}

@@ -62,7 +62,7 @@ export class UserTgUpdate {
       (item, index) =>
         `№ п.п: ${index + 1}\nid_tg: ${item.id_tg}\nfull_name: ${
           item.full_name || '-'
-        }\nДоступ к боту: ${item.access.tp_search || '-'}\n\n`,
+        }\n\n`,
     );
     const textUsers = listUsers.join('');
     await ctx.reply(

@@ -2,14 +2,12 @@ import { Module } from '@nestjs/common';
 import { MainController } from './main.controller';
 import { MainUpdate } from './main.update';
 import { MainService } from './main.service';
-import { SubstationService } from '../substation/substation.sevice';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { Substation } from '../substation';
-import { UserTg, UserTgService, UserTgAccess } from '../user-tg';
+import { SubstationModule } from '../substation';
+import { UserTgModule } from '../user-tg';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Substation, UserTg, UserTgAccess])],
+  imports: [UserTgModule, SubstationModule],
   controllers: [MainController],
-  providers: [MainUpdate, MainService, SubstationService, UserTgService],
+  providers: [MainUpdate, MainService],
 })
 export class MainModule {}

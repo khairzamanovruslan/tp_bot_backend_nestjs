@@ -3,7 +3,7 @@ import { Telegraf } from 'telegraf';
 import { Context } from '../context/context.interface';
 import { Logs } from '../features/logs';
 import { MainService } from './main.service';
-import { SubstationService } from '../substation/substation.sevice';
+import { SubstationService } from '../substation';
 import { mainEvents } from '../types/types';
 import { UserTgService } from '../user-tg';
 
