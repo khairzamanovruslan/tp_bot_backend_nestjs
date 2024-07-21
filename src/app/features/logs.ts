@@ -1,10 +1,10 @@
 import { SceneContext } from 'telegraf/typings/scenes';
-import { Context } from '../context/context.interface';
+import { Context } from '../../context/context.interface';
 import {
   mainCommands,
   defaultCommands,
   additionalScenesButtons,
-} from '../types/types';
+} from '../../types/types';
 
 export class Logs {
   command(

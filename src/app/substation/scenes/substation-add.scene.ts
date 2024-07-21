@@ -15,9 +15,9 @@ import {
   additionalScenesButtons,
   mainEvents,
   mainScenes,
-} from '../../types/types';
+} from '../../../types/types';
 import { kbBtnCancel } from '../../features/keyboards';
-import { Context } from 'src/app/context/context.interface';
+import { Context } from 'src/context/context.interface';
 import { countOccurrences } from '../utils/checking-string-for-char';
 
 const Log = new Logs();

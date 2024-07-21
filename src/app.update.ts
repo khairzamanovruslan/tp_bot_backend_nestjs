@@ -1,8 +1,8 @@
 import { Ctx, InjectBot, Start, Update, Help } from 'nestjs-telegraf';
 import { Telegraf } from 'telegraf';
 import { AppService } from './app.service';
-import { Context } from './app/context/context.interface';
-import { defaultCommands, mainEvents, mainCommands } from './app/types/types';
+import { Context } from './context/context.interface';
+import { defaultCommands, mainEvents, mainCommands } from './types/types';
 import { Logs } from './app/features/logs';
 import { UserTgService } from './app/user-tg';
 

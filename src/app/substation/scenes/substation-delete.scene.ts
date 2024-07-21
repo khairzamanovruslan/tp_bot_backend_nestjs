@@ -11,7 +11,7 @@ import {
 } from 'nestjs-telegraf';
 import { SceneContext } from 'telegraf/typings/scenes';
 import { Logs } from '../../features/logs';
-import { additionalScenesButtons, mainScenes } from '../../types/types';
+import { additionalScenesButtons, mainScenes } from '../../../types/types';
 import { kbBtnCancel } from '../../features/keyboards';
 
 const Log = new Logs();

@@ -1,10 +1,10 @@
 import { Ctx, InjectBot, Update, On, Message } from 'nestjs-telegraf';
 import { Telegraf } from 'telegraf';
-import { Context } from '../context/context.interface';
+import { Context } from '../../context/context.interface';
 import { Logs } from '../features/logs';
 import { MainService } from './main.service';
 import { SubstationService } from '../substation';
-import { mainEvents } from '../types/types';
+import { mainEvents } from '../../types/types';
 import { UserTgService } from '../user-tg';
 
 const Log = new Logs();
