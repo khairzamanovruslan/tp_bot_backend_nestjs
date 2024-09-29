@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { MainController } from './main.controller';
 import { MainUpdate } from './main.update';
 import { MainService } from './main.service';
-import { SubstationModule } from '../substation';
-import { UserTgModule } from '../user-tg';
+import { SubstationsModule } from '../substations/substations.module';
+import { UsersTgModule } from '../users-tg/users-tg.module';
 
 @Module({
-  imports: [UserTgModule, SubstationModule],
+  imports: [UsersTgModule, SubstationsModule],
   controllers: [MainController],
   providers: [MainUpdate, MainService],
 })

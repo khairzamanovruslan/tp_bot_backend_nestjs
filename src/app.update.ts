@@ -3,8 +3,8 @@ import { Telegraf } from 'telegraf';
 import { AppService } from './app.service';
 import { Context } from './context/context.interface';
 import { defaultCommands, mainEvents, mainCommands } from './types/types';
-import { Logs } from './app/features/logs';
-import { UserTgService } from './app/user-tg';
+import { Logs } from './features/logs';
+import { UsersTgService } from './app/users-tg/users-tg.sevice';
 
 const Log = new Logs();
 
@@ -13,14 +13,14 @@ export class AppUpdate {
   constructor(
     @InjectBot() private readonly bot: Telegraf<Context>,
     private readonly appService: AppService,
-    private readonly userTgService: UserTgService,
+    private readonly usersTgService: UsersTgService,
   ) {}
 
   @Start()
   async startCommand(@Ctx() ctx: Context) {
     const id_tg = String(ctx.update['message']['from']['id']);
     //Проверка пользователя
-    const user = await this.userTgService.getOneAndAccess(id_tg);
+    const user = await this.usersTgService.getOneUserTgAndAccess(id_tg);
     if (!user || !user.access.tp_search) {
       await ctx.reply('Вам отказано в доступе!');
       return;
@@ -37,7 +37,7 @@ export class AppUpdate {
   async helpCommand(@Ctx() ctx: Context) {
     const id_tg = String(ctx.update['message']['from']['id']);
     //Проверка пользователя
-    const user = await this.userTgService.getOneAndAccess(id_tg);
+    const user = await this.usersTgService.getOneUserTgAndAccess(id_tg);
     if (!user || !user.access.help) {
       await ctx.reply('Вам отказано в доступе!');
       return;
@@ -46,7 +46,8 @@ export class AppUpdate {
     const text = `Все команды:\n
 /${mainCommands.SUBSTATION_REPORT}
 /${mainCommands.SUBSTATION_ADD}
-/${mainCommands.SUBSTATION_DELETE}
+/${mainCommands.SUBSTATION_UPDATE}
+/${mainCommands.SUBSTATION_DELETE}\n
 /${mainCommands.USERS_TG_REPORT}
 /${mainCommands.USER_TG_ADD}
 /${mainCommands.USER_TG_DELETE}

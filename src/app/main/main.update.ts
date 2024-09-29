@@ -1,11 +1,11 @@
 import { Ctx, InjectBot, Update, On, Message } from 'nestjs-telegraf';
 import { Telegraf } from 'telegraf';
 import { Context } from '../../context/context.interface';
-import { Logs } from '../features/logs';
+import { Logs } from '../../features/logs';
 import { MainService } from './main.service';
-import { SubstationService } from '../substation';
+import { SubstationsService } from '../substations/substations.sevice';
 import { mainEvents } from '../../types/types';
-import { UserTgService } from '../user-tg';
+import { UsersTgService } from '../users-tg/users-tg.sevice';
 
 const Log = new Logs();
 
@@ -14,8 +14,8 @@ export class MainUpdate {
   constructor(
     @InjectBot() private readonly bot: Telegraf<Context>,
     private readonly mainService: MainService,
-    private readonly substationService: SubstationService,
-    private readonly userTgService: UserTgService,
+    private readonly substationsService: SubstationsService,
+    private readonly usersTgService: UsersTgService,
   ) {}
 
   @On('text')
@@ -25,7 +25,7 @@ export class MainUpdate {
     const id_tg = String(ctx.update['message']['from']['id']);
     await Log.message(ctx, id_tg, messageLowerCase);
     //Проверка пользователя
-    const user = await this.userTgService.getOneAndAccess(id_tg);
+    const user = await this.usersTgService.getOneUserTgAndAccess(id_tg);
     if (!user || !user.access.tp_search) {
       await ctx.reply('Вам отказано в доступе!');
       return;
@@ -33,7 +33,7 @@ export class MainUpdate {
     //Основная логика функции
     if (!ctx.session.mainEvent) return;
     if (ctx.session.mainEvent === mainEvents.SUBSTATION_SEARCH) {
-      const substation = await this.substationService.getOneByName(
+      const substation = await this.substationsService.getOneByName(
         messageLowerCase,
       );
       if (!substation) {
