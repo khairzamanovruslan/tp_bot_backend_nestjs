@@ -30,7 +30,14 @@ export class SubstationsService {
     if (substation) {
       return false;
     }
-    const data = await this.substationsRepository.create(dto);
+    const lastRecord = await this.getAll();
+    const lastRecordId = lastRecord[0].dataValues.id;
+    const data = await this.substationsRepository.create({
+      id: lastRecordId + 1,
+      name: dto.name,
+      latitude: dto.latitude,
+      longitude: dto.longitude,
+    });
     return data;
   }
 
