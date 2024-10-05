@@ -1,3 +1,12 @@
 {
-  "sessions": []
+  "sessions": [
+    {
+      "id": "698484110:698484110",
+      "data": {
+        "__scenes": {},
+        "mainEvent": "substation-search",
+        "substation_name_value": ""
+      }
+    }
+  ]
 }

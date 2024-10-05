@@ -30,7 +30,7 @@ export class SubstationsService {
     if (substation) {
       return false;
     }
-    const data = await this.substationsRepository.create(dto);
+    const data = await this.substationsRepository.create({ ...dto });
     return data;
   }
 
