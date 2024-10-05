@@ -59,7 +59,7 @@ export class SubstationsController {
   })
   @Post()
   async createUser(@Body() substationDto: CreateSubstationDto) {
-    return this.substationsService.create(substationDto);
+    return this.substationsService.createTp(substationDto);
   }
 
   @ApiOperation({
