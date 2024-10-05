@@ -30,7 +30,11 @@ export class SubstationsService {
     if (substation) {
       return false;
     }
-    const data = await this.substationsRepository.create({ ...dto });
+    const data = await this.substationsRepository.create({
+      name: dto.name,
+      latitude: dto.latitude,
+      longitude: dto.longitude,
+    });
     return data;
   }
 
