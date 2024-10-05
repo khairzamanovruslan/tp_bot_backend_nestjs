@@ -25,7 +25,7 @@ export class SubstationsService {
     return substation;
   }
 
-  async create(dto: CreateSubstationDto) {
+  async createTp(dto: CreateSubstationDto) {
     const substation = await this.getOneByName(dto.name);
     if (substation) {
       return false;

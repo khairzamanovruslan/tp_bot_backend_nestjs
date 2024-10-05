@@ -115,7 +115,7 @@ export class SubstationsAddScene {
         latitude,
         longitude,
       };
-      const data = await this.substationsService.create(createSubstationData);
+      const data = await this.substationsService.createTp(createSubstationData);
       if (!data) {
         await ctxScene.scene.leave();
         ctx.session.mainEvent = mainEvents.SUBSTATION_SEARCH;
