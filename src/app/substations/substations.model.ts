@@ -2,7 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
 interface SubstationsAttrs {
-  readonly id: number;
   readonly name: string;
   readonly latitude: string;
   readonly longitude: string;
