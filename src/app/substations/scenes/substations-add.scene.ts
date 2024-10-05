@@ -126,10 +126,7 @@ export class SubstationsAddScene {
         await ctx.reply('Для поиска ТП введите номер:');
         return;
       }
-      const { dataValues } = data;
-      await ctx.reply(
-        `Отлично!\nНовая ТП добавлена в базу.\nНомер: ${dataValues.name}\nКоординаты: ${dataValues.latitude},${dataValues.longitude}`,
-      );
+      await ctx.reply(`Отлично!\nНовая ТП добавлена в базу.`);
       await ctxScene.scene.leave();
       ctx.session.mainEvent = mainEvents.SUBSTATION_SEARCH;
       ctx.session.substation_name_value = '';
