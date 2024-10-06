@@ -24,19 +24,23 @@ export class SubstationsService {
     });
     return substation;
   }
+  async getLastPrimaryKeyTp() {
+    const data = await this.substationsRepository.findAll({
+      order: [['id', 'DESC']],
+      limit: 1,
+    });
+    const id = data[0].dataValues.id;
+    return id;
+  }
 
   async createTp(dto: CreateSubstationDto) {
     const substation = await this.getOneByName(dto.name);
     if (substation) {
       return false;
     }
-    const lastRecord = await this.substationsRepository.findAll({
-      order: [['id', 'DESC']],
-      limit: 1,
-    });
-    const lastRecordId = lastRecord[0].dataValues.id;
+    const lastPrimaryKeyTp = await this.getLastPrimaryKeyTp();
     const data = await this.substationsRepository.create({
-      id: lastRecordId + 1,
+      id: lastPrimaryKeyTp + 1,
       name: dto.name,
       latitude: dto.latitude,
       longitude: dto.longitude,
