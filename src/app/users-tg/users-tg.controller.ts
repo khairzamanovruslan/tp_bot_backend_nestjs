@@ -69,7 +69,11 @@ export class UsersTgController {
     description: 'При удалении вернет true',
     type: Boolean,
   })
-  @ApiParam({ name: 'id_tg', required: true, description: 'Имя подстанции' })
+  @ApiParam({
+    name: 'id_tg',
+    required: true,
+    description: 'id пользователя телеграма',
+  })
   @Delete('/:id_tg')
   async delete(@Param('id_tg') id_tg: string) {
     return this.usersTgService.delete(id_tg);

@@ -66,7 +66,7 @@ export class UsersTgUpdate {
     );
     const textUsers = listUsers.join('');
     await ctx.reply(
-      `Отчет_пользователи\n\nВсего: ${usersTg.length} шт.\n\nСписок:\n${textUsers}`,
+      `Список пользователей:\n${textUsers}Всего: ${usersTg.length}`,
     );
     await ctx.reply('Для поиска ТП введите номер:');
     //Логи для разработчика
@@ -98,11 +98,12 @@ users_report: ${Boolean(item.access.users_report)}
 user_add: ${Boolean(item.access.user_add)}
 user_delete: ${Boolean(item.access.user_delete)}
 users_access_report: ${Boolean(item.access.users_access_report)}
+notifications_users_tg_all: ${Boolean(item.access.notifications_users_tg_all)}
 help: ${Boolean(item.access.help)}\n\n`,
     );
     const textUsers = listUsers.join('');
     await ctx.reply(
-      `Отчет_пользователи_права доступа\n\nВсего: ${usersTg.length} шт.\n\nСписок:\n${textUsers}`,
+      `Список пользователей (права доступа):\n${textUsers}Всего: ${usersTg.length}`,
     );
     await ctx.reply('Для поиска ТП введите номер:');
     //Логи для разработчика

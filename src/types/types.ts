@@ -13,6 +13,7 @@ export enum mainCommands {
   USER_TG_ADD = 'add_user',
   USER_TG_DELETE = 'delete_user',
   USER_TG_ACCESS = 'report_users_access',
+  NOTIFICATIONS_USERS_TG_ALL = 'notifications_users_tg_all',
 }
 export enum defaultCommands {
   START = 'start',
@@ -24,6 +25,7 @@ export enum mainScenes {
   SUBSTATION_ADD_SCENE = 'substation_add_scene',
   SUBSTATION_DELETE_SCENE = 'substation_delete_scene',
   SUBSTATION_UPDATE_SCENE = 'substation_update_scene',
+  NOTIFICATIONS_USERS_TG_ALL_SCENE = 'notifications_users_tg_all_scene',
 }
 export enum additionalScenesButtons {
   btnCancel = 'btn_cancel',

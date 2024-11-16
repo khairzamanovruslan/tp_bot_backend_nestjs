@@ -78,7 +78,7 @@ export class SubstationsUpdate {
     const listItemsName = substations.map((item) => item.name);
     const listItemsNameStr = listItemsName.join(', ');
     await ctx.reply(
-      `Отчет_ТП\n\nВсего: ${substations.length} шт. \n\nСписок ТП:\n${listItemsNameStr}`,
+      `Список ТП:\n${listItemsNameStr}\n\nВсего: ${substations.length} шт.`,
     );
     await ctx.reply('Для поиска ТП введите номер:');
     //Логи для разработчика

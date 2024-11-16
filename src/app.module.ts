@@ -9,6 +9,7 @@ import { AppUpdate } from './app.update';
 import { AppService } from './app.service';
 import { UsersModule } from './app/users/users.module';
 import { RolesModule } from './app/roles/roles.module';
+import { NotificationsModule } from './app/notifications/notifications.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { RolesModule } from './app/roles/roles.module';
     SubstationsModule,
     UsersModule,
     RolesModule,
+    NotificationsModule,
     MainModule,
   ],
   controllers: [],

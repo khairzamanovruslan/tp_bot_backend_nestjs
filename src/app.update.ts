@@ -51,7 +51,8 @@ export class AppUpdate {
 /${mainCommands.USERS_TG_REPORT}
 /${mainCommands.USER_TG_ADD}
 /${mainCommands.USER_TG_DELETE}
-/${mainCommands.USER_TG_ACCESS}`;
+/${mainCommands.USER_TG_ACCESS}\n
+/${mainCommands.NOTIFICATIONS_USERS_TG_ALL}`;
     await ctx.reply(text);
     //Логи для разработчика
     await Log.command(ctx, id_tg, defaultCommands.HELP);
