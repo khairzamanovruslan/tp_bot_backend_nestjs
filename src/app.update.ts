@@ -21,12 +21,12 @@ export class AppUpdate {
     const id_tg = String(ctx.update['message']['from']['id']);
     //Проверка пользователя
     const user = await this.usersTgService.getOneUserTgAndAccess(id_tg);
-    if (!user || !user.access.tp_search) {
+    if (!user || !user.access.devices_search) {
       await ctx.reply('Вам отказано в доступе!');
       return;
     }
     //Основная логика функции
-    ctx.session.mainEvent = mainEvents.SUBSTATION_SEARCH;
+    ctx.session.mainEvent = mainEvents.DEVICES_SEARCH;
     await ctx.reply('Для поиска ТП введите номер:');
     //Логи для разработчика
     await Log.command(ctx, id_tg, defaultCommands.START);
@@ -44,15 +44,15 @@ export class AppUpdate {
     }
     //Основная логика функции
     const text = `Все команды:\n
-/${mainCommands.SUBSTATION_REPORT}
-/${mainCommands.SUBSTATION_ADD}
-/${mainCommands.SUBSTATION_UPDATE}
-/${mainCommands.SUBSTATION_DELETE}\n
-/${mainCommands.USERS_TG_REPORT}
-/${mainCommands.USER_TG_ADD}
-/${mainCommands.USER_TG_DELETE}
-/${mainCommands.USER_TG_ACCESS}\n
-/${mainCommands.NOTIFICATIONS_USERS_TG_ALL}`;
+/${mainCommands.DEVICES_REPORT} - список всех "девайсов"
+/${mainCommands.DEVICE_ADD} - добавить "девайс"
+/${mainCommands.DEVICE_UPDATE} - обновить "девайс"
+/${mainCommands.DEVICE_DELETE} - удалить "девайс"\n 
+/${mainCommands.USERS_TG_REPORT} - список пользователей
+/${mainCommands.USER_TG_ADD} - добавить пользователя
+/${mainCommands.USER_TG_DELETE} - удалить пользователя
+/${mainCommands.USER_TG_ACCESS} - список пользователей (с правами)\n
+/${mainCommands.NOTIFICATIONS_USERS_TG_ALL} - отправить уведомление всем пользователям`;
     await ctx.reply(text);
     //Логи для разработчика
     await Log.command(ctx, id_tg, defaultCommands.HELP);

@@ -35,7 +35,21 @@ export class UsersTgService {
       include: UsersTgAccess,
     });
   }
-  async createUserTgFromTelegramBot(id_tg: string) {
+  async delete(id_tg: string) {
+    const userTgData = await this.getOne(id_tg);
+    if (!userTgData) {
+      return false;
+    }
+    const data = await this.usersTgRepository.destroy({
+      where: {
+        id_tg: {
+          [Op.eq]: id_tg,
+        },
+      },
+    });
+    return Boolean(data);
+  }
+  async createUserTg(id_tg: string) {
     const userTgData = await this.getOne(id_tg);
     if (userTgData) {
       return false;
@@ -63,19 +77,5 @@ export class UsersTgService {
       user_tg_id: userTg.id,
     });
     return userTg;
-  }
-  async delete(id_tg: string) {
-    const userTgData = await this.getOne(id_tg);
-    if (!userTgData) {
-      return false;
-    }
-    const data = await this.usersTgRepository.destroy({
-      where: {
-        id_tg: {
-          [Op.eq]: id_tg,
-        },
-      },
-    });
-    return Boolean(data);
   }
 }

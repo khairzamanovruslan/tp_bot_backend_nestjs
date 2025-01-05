@@ -17,7 +17,7 @@ import {
   mainEvents,
 } from '../../../types/types';
 import { kbBtnCancel } from '../../../features/keyboards';
-import { Context } from 'src/context/context.interface';
+import { Context } from '../../../context/context.interface';
 
 const Log = new Logs();
 
@@ -28,9 +28,8 @@ export class NotificationsScene {
   @SceneEnter()
   async start(@Ctx() ctxScene: SceneContext, @Ctx() ctx: Context) {
     //Основная логика функции
-    const usersTg = await this.notificationService.getAllUsersTg();
     await ctx.reply(
-      `Уведомление для всех пользователей телеграм бота!\nПроцесс отправки займет около ${usersTg.length} (сек).\nВведите текст сообщения:`,
+      `Уведомление для всех пользователей телеграм бота!\nВведите текст сообщения:`,
       kbBtnCancel,
     );
     return;
@@ -83,13 +82,14 @@ export class NotificationsScene {
             );
           }
         }
-        await delay(1000);
+        await delay(0);
       }
     }
     await broadcastMessage(usersTg, message);
     await ctx.reply('Уведомление отправлено всем пользователям телеграм бота!');
+    await ctx.reply('Для поиска "девайса" введите имя:');
     ctxScene.scene.leave();
-    ctx.session.mainEvent = mainEvents.SUBSTATION_SEARCH;
+    ctx.session.mainEvent = mainEvents.DEVICES_SEARCH;
     return;
   }
 }

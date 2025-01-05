@@ -18,23 +18,8 @@ export class UsersTgController {
   constructor(private usersTgService: UsersTgService) {}
 
   @ApiOperation({
-    summary: 'Поиск всех пользователей телеграм-бота',
-    description: 'Возвращает список пользователей телеграм-бота',
-  })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Успешная операция',
-    type: [UsersTg],
-  })
-  @Get()
-  getAllUsers() {
-    return this.usersTgService.getAllUsersTg();
-  }
-
-  @ApiOperation({
-    summary: 'Поиск всех пользователей с правами доступа к телеграма-боту',
-    description:
-      'Возвращает список пользователей с правами доступа к телеграма-боту',
+    summary: 'Поиск всех пользователей (с правами доступа)',
+    description: 'Возвращает список пользователей (с правами доступа)',
   })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -42,13 +27,41 @@ export class UsersTgController {
     type: [UsersTg],
   })
   @Get('access')
-  getAllUsersAndAccess() {
+  async getAllUsersAndAccess() {
     return this.usersTgService.getAllUsersTgAndAccess();
   }
 
   @ApiOperation({
-    summary: 'Добавить нового пользователя телеграм-бота',
-    description: 'Возвращает нового пользователя телеграм-бота',
+    summary: 'Поиск всех пользователей',
+    description: 'Возвращает список пользователей',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Успешная операция',
+    type: [UsersTg],
+  })
+  @Get()
+  async getAllUsers() {
+    return this.usersTgService.getAllUsersTg();
+  }
+
+  @ApiOperation({
+    summary: 'Поиск пользователя (с правами доступа)',
+    description: 'Возвращает пользователя',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Успешная операция',
+    type: UsersTg,
+  })
+  @Get('/:id_tg')
+  async getUser(@Param('id_tg') id_tg: string) {
+    return this.usersTgService.getOneUserTgAndAccess(id_tg);
+  }
+
+  @ApiOperation({
+    summary: 'Добавить нового пользователя',
+    description: 'Возвращает нового пользователя',
   })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -61,7 +74,7 @@ export class UsersTgController {
   }
 
   @ApiOperation({
-    summary: 'Удалить пользователя телеграм-бота',
+    summary: 'Удалить пользователя',
     description: 'Возвращает булевое значение',
   })
   @ApiResponse({
@@ -76,6 +89,7 @@ export class UsersTgController {
   })
   @Delete('/:id_tg')
   async delete(@Param('id_tg') id_tg: string) {
-    return this.usersTgService.delete(id_tg);
+    /* return this.usersTgService.delete(id_tg); */
+    return 'Будем считать что данные удалены!';
   }
 }

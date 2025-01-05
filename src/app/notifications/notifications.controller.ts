@@ -9,6 +9,6 @@ export class NotificationsController {
 
   @Get()
   get() {
-    return 'notifications';
+    return 'Уведомление';
   }
 }

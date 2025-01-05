@@ -24,19 +24,19 @@ export class UsersTgAccess extends Model<UsersTgAccess> {
     description: 'Поиск ТП в телеграм-боте',
   })
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
-  tp_search: boolean;
+  devices_search: boolean;
 
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
-  tp_report: boolean;
+  devices_report: boolean;
 
   @Column({ type: DataType.BOOLEAN, defaultValue: false })
-  tp_add: boolean;
+  device_add: boolean;
 
   @Column({ type: DataType.BOOLEAN, defaultValue: false })
-  tp_update: boolean;
+  device_update: boolean;
 
   @Column({ type: DataType.BOOLEAN, defaultValue: false })
-  tp_delete: boolean;
+  device_delete: boolean;
 
   @Column({ type: DataType.BOOLEAN, defaultValue: false })
   users_report: boolean;

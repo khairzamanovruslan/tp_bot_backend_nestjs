@@ -1,7 +1,7 @@
 import { Ctx, InjectBot, Update, Command } from 'nestjs-telegraf';
 import { Telegraf } from 'telegraf';
 import { Context } from '../../context/context.interface';
-import { SubstationsService } from './substations.sevice';
+import { DevicesService } from './devices.sevice';
 import { mainCommands, mainScenes } from '../../types/types';
 import { SceneContext } from 'telegraf/typings/scenes';
 import { Logs } from '../../features/logs';
@@ -10,79 +10,90 @@ import { UsersTgService } from '../users-tg/users-tg.sevice';
 const Log = new Logs();
 
 @Update()
-export class SubstationsUpdate {
+export class DevicesUpdate {
   constructor(
     @InjectBot() private readonly bot: Telegraf<Context>,
-    private readonly substationsService: SubstationsService,
+    private readonly devicesService: DevicesService,
     private readonly usersTgService: UsersTgService,
   ) {}
 
-  @Command(mainCommands.SUBSTATION_ADD)
-  async substationAddScene(@Ctx() ctx: SceneContext) {
+  @Command(mainCommands.DEVICE_ADD)
+  async deviceAddScene(@Ctx() ctx: SceneContext) {
     const id_tg = String(ctx.update['message']['from']['id']);
     //Проверка пользователя
     const user = await this.usersTgService.getOneUserTgAndAccess(id_tg);
-    if (!user || !user.access.tp_add) {
+    if (!user || !user.access.device_add) {
       await ctx.reply('Вам отказано в доступе!');
       return;
     }
     //Основная логика функции
-    await ctx.scene.enter(mainScenes.SUBSTATION_ADD_SCENE);
+    await ctx.scene.enter(mainScenes.DEVICE_ADD_SCENE);
     //Логи для разработчика
-    await Log.command(ctx, id_tg, mainCommands.SUBSTATION_ADD);
+    await Log.command(ctx, id_tg, mainCommands.DEVICE_ADD);
     return;
   }
-  @Command(mainCommands.SUBSTATION_DELETE)
-  async substationDeleteScene(@Ctx() ctx: SceneContext) {
+  @Command(mainCommands.DEVICE_DELETE)
+  async deviceDeleteScene(@Ctx() ctx: SceneContext) {
     const id_tg = String(ctx.update['message']['from']['id']);
     //Проверка пользователя
     const user = await this.usersTgService.getOneUserTgAndAccess(id_tg);
-    if (!user || !user.access.tp_delete) {
+    if (!user || !user.access.device_delete) {
       await ctx.reply('Вам отказано в доступе!');
       return;
     }
     //Основная логика функции
-    await ctx.scene.enter(mainScenes.SUBSTATION_DELETE_SCENE);
+    await ctx.scene.enter(mainScenes.DEVICE_DELETE_SCENE);
     //Логи для разработчика
-    await Log.command(ctx, id_tg, mainCommands.SUBSTATION_DELETE);
-    return;
-  }
-
-  @Command(mainCommands.SUBSTATION_UPDATE)
-  async substationUpdateScene(@Ctx() ctx: SceneContext) {
-    const id_tg = String(ctx.update['message']['from']['id']);
-    //Проверка пользователя
-    const user = await this.usersTgService.getOneUserTgAndAccess(id_tg);
-    if (!user || !user.access.tp_update) {
-      await ctx.reply('Вам отказано в доступе!');
-      return;
-    }
-    //Основная логика функции
-    await ctx.scene.enter(mainScenes.SUBSTATION_UPDATE_SCENE);
-    //Логи для разработчика
-    await Log.command(ctx, id_tg, mainCommands.SUBSTATION_UPDATE);
+    await Log.command(ctx, id_tg, mainCommands.DEVICE_DELETE);
     return;
   }
 
-  @Command(mainCommands.SUBSTATION_REPORT)
-  async substationReport(ctx: Context) {
+  @Command(mainCommands.DEVICE_UPDATE)
+  async deviceUpdateScene(@Ctx() ctx: SceneContext) {
     const id_tg = String(ctx.update['message']['from']['id']);
     //Проверка пользователя
     const user = await this.usersTgService.getOneUserTgAndAccess(id_tg);
-    if (!user || !user.access.tp_report) {
+    if (!user || !user.access.device_update) {
       await ctx.reply('Вам отказано в доступе!');
       return;
     }
     //Основная логика функции
-    const substations = await this.substationsService.getAll();
-    const listItemsName = substations.map((item) => item.name);
-    const listItemsNameStr = listItemsName.join(', ');
-    await ctx.reply(
-      `Список ТП:\n${listItemsNameStr}\n\nВсего: ${substations.length} шт.`,
-    );
-    await ctx.reply('Для поиска ТП введите номер:');
+    await ctx.scene.enter(mainScenes.DEVICE_UPDATE_SCENE);
     //Логи для разработчика
-    await Log.command(ctx, id_tg, mainCommands.SUBSTATION_REPORT);
+    await Log.command(ctx, id_tg, mainCommands.DEVICE_UPDATE);
+    return;
+  }
+
+  @Command(mainCommands.DEVICES_REPORT)
+  async devicesReport(ctx: Context) {
+    const id_tg = String(ctx.update['message']['from']['id']);
+    //Проверка пользователя
+    const user = await this.usersTgService.getOneUserTgAndAccess(id_tg);
+    if (!user || !user.access.devices_report) {
+      await ctx.reply('Вам отказано в доступе!');
+      return;
+    }
+
+    const devicesList =
+      await this.devicesService.getAllTypesObjectWithDevices();
+    const delay = (ms: number) =>
+      new Promise((resolve) => setTimeout(resolve, ms));
+    async function handlerDevices(data) {
+      for (const item of data) {
+        const listDevicesData = item.dataValues.devices;
+        const listDevices = listDevicesData.map((i) => i.name);
+        const prepearListDevice =
+          listDevices.length !== 0 ? `\n${listDevices.join(', ')}` : '';
+        const res = `Список ${item.name}: ${prepearListDevice}\n\nВсего: ${item.dataValues.devices.length}\n\n`;
+        await ctx.reply(res);
+        await delay(0);
+      }
+    }
+    await handlerDevices(devicesList);
+
+    await ctx.reply('Для поиска "девайса" введите имя:');
+    //Логи для разработчика
+    await Log.command(ctx, id_tg, mainCommands.DEVICES_REPORT);
     return;
   }
 }

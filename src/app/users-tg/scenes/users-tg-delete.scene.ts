@@ -29,7 +29,7 @@ export class UsersTgDeleteScene {
   @Action(additionalScenesButtons.btnCancel)
   async userTgCancel(@Ctx() ctx: SceneContext) {
     //Основная логика функции
-    await ctx.reply(`Отмена!\nДля поиска ТП введите номер:`);
+    await ctx.reply(`Отмена!\nДля поиска "девайса" введите имя:`);
     await ctx.scene.leave();
     //Логи для разработчика
     const id_tg = String(ctx.update['callback_query']['from']['id']);
@@ -66,7 +66,7 @@ export class UsersTgDeleteScene {
       );
       return;
     }
-    await ctx.reply('Пользователь удален!\nДля поиска ТП введите номер:');
+    await ctx.reply('Пользователь удален!\nДля поиска "девайса" введите имя:');
     ctx.scene.leave();
     //Логи для разработчика
     const id_tg = String(ctx.update['message']['from']['id']);

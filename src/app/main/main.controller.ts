@@ -2,7 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { ApiExcludeEndpoint, ApiTags } from '@nestjs/swagger';
 import { MainService } from './main.service';
 
-@ApiTags('Главная сайта')
+@ApiTags('Главная')
 @Controller()
 export class MainController {
   constructor(private readonly mainService: MainService) {}

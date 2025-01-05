@@ -3,7 +3,7 @@ import { UsersTgModule } from './app/users-tg/users-tg.module';
 import { configModule } from './config/config.module';
 import { telegrafModule } from './config/telegraf.module';
 import { sequelizeModule } from './config/sequelize.module';
-import { SubstationsModule } from './app/substations/substations.module';
+import { DevicesModule } from './app/devices/devices.module';
 import { MainModule } from './app/main/main.module';
 import { AppUpdate } from './app.update';
 import { AppService } from './app.service';
@@ -17,7 +17,7 @@ import { NotificationsModule } from './app/notifications/notifications.module';
     telegrafModule(),
     sequelizeModule(),
     UsersTgModule,
-    SubstationsModule,
+    DevicesModule,
     UsersModule,
     RolesModule,
     NotificationsModule,

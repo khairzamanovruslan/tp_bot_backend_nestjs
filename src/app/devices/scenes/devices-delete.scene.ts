@@ -1,4 +1,4 @@
-import { SubstationsService } from '../substations.sevice';
+import { DevicesService } from '../devices.sevice';
 import { Injectable } from '@nestjs/common';
 import {
   Action,
@@ -17,19 +17,19 @@ import { kbBtnCancel } from '../../../features/keyboards';
 const Log = new Logs();
 
 @Injectable()
-@Scene(mainScenes.SUBSTATION_DELETE_SCENE)
-export class SubstationsDeleteScene {
-  constructor(private readonly substationsService: SubstationsService) {}
+@Scene(mainScenes.DEVICE_DELETE_SCENE)
+export class DevicesDeleteScene {
+  constructor(private readonly devicesService: DevicesService) {}
   @SceneEnter()
-  async substationStart(@Ctx() ctx: SceneContext) {
+  async deviceStart(@Ctx() ctx: SceneContext) {
     //Основная логика функции
-    await ctx.reply('Для удаления ТП введите её номер:', kbBtnCancel);
+    await ctx.reply('Для удаления "девайса" введите имя:', kbBtnCancel);
     return;
   }
   @Action(additionalScenesButtons.btnCancel)
-  async userTgCancel(@Ctx() ctx: SceneContext) {
+  async deviceCancel(@Ctx() ctx: SceneContext) {
     //Основная логика функции
-    await ctx.reply(`Отмена!\nДля поиска ТП введите номер:`);
+    await ctx.reply(`Отмена!\nДля поиска "девайса" введите имя:`);
     await ctx.scene.leave();
     //Логи для разработчика
     const id_tg = String(ctx.update['callback_query']['from']['id']);
@@ -42,27 +42,26 @@ export class SubstationsDeleteScene {
     @Next() next: () => ParameterDecorator,
     @Message('text') message: string,
   ) {
-    const messageLowerCase = message.toLowerCase();
     //Основная логика функции
-    if (messageLowerCase[0] === '/') {
+    if (message[0] === '/') {
       await ctx.reply(
-        `Внимание!\nНекорректный номер ТП!\nВведите другой номер ТП:`,
+        `Внимание!\nНекорректный номер "девайса"!\nВведите другое имя:`,
         kbBtnCancel,
       );
       return;
     }
-    const substation = await this.substationsService.delete(messageLowerCase);
-    if (!substation) {
+    const data = await this.devicesService.deleteDevice(message);
+    if (!data) {
       await ctx.reply(
-        `Внимание!\nНе существует ТП с таким номером.\nВведите другой номер ТП:`,
+        `Внимание!\nНе существует "девайса" с таким именем.\nВведите другое имя:`,
         kbBtnCancel,
       );
       return;
     }
-    await ctx.reply('ТП удалена!\nДля поиска ТП введите номер:');
+    await ctx.reply('"девайс" удален!\nДля поиска "девайса" введите имя:');
     ctx.scene.leave();
     //Логи для разработчика
     const id_tg = String(ctx.update['message']['from']['id']);
-    await Log.message(ctx, id_tg, messageLowerCase);
+    await Log.message(ctx, id_tg, message);
   }
 }

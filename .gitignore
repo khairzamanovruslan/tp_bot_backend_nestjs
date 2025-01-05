@@ -3,6 +3,7 @@
 /node_modules
 .env
 .env_на сервере
+.good.env
 session_db.json
 
 # Logs

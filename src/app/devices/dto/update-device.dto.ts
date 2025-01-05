@@ -1,9 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateSubstationDto {
-  @ApiProperty({ example: '777', description: 'Имя подстанции' })
-  readonly name: string;
-
+export class UpdateDeviceDto {
   @ApiProperty({ example: '60.504975', description: 'Широта' })
   readonly latitude: string;
 

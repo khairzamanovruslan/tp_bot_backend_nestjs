@@ -3,7 +3,7 @@ import { Telegraf } from 'telegraf';
 import { Context } from '../../context/context.interface';
 import { Logs } from '../../features/logs';
 import { MainService } from './main.service';
-import { SubstationsService } from '../substations/substations.sevice';
+import { DevicesService } from '../devices/devices.sevice';
 import { mainEvents } from '../../types/types';
 import { UsersTgService } from '../users-tg/users-tg.sevice';
 
@@ -14,30 +14,27 @@ export class MainUpdate {
   constructor(
     @InjectBot() private readonly bot: Telegraf<Context>,
     private readonly mainService: MainService,
-    private readonly substationsService: SubstationsService,
+    private readonly devicesService: DevicesService,
     private readonly usersTgService: UsersTgService,
   ) {}
 
   @On('text')
   async textHandler(@Message('text') message: string, @Ctx() ctx: Context) {
-    const messageLowerCase = message.toLowerCase();
     //Логи для разработчика
     const id_tg = String(ctx.update['message']['from']['id']);
-    await Log.message(ctx, id_tg, messageLowerCase);
+    await Log.message(ctx, id_tg, message);
     //Проверка пользователя
     const user = await this.usersTgService.getOneUserTgAndAccess(id_tg);
-    if (!user || !user.access.tp_search) {
+    if (!user || !user.access.devices_search) {
       await ctx.reply('Вам отказано в доступе!');
       return;
     }
     //Основная логика функции
     if (!ctx.session.mainEvent) return;
-    if (ctx.session.mainEvent === mainEvents.SUBSTATION_SEARCH) {
-      const substation = await this.substationsService.getOneByName(
-        messageLowerCase,
-      );
+    if (ctx.session.mainEvent === mainEvents.DEVICES_SEARCH) {
+      const substation = await this.devicesService.getOneByName(message);
       if (!substation) {
-        await ctx.reply(`Не найдено!\nДля поиска введите номер ТП:`);
+        await ctx.reply(`Не найдено!\nДля поиска "девайса" введите имя:`);
         return;
       }
       const latitude = substation.latitude;
@@ -49,8 +46,8 @@ export class MainUpdate {
       const linkForUser = `https://yandex.ru/maps/?pt=${longitude},${latitude}&z=18&l=map`;
       await ctx.reply(`${latitude},${longitude}`);
       await ctx.reply(linkForUser);
-      await ctx.reply('Для поиска ТП введите номер:');
-      ctx.session.mainEvent = mainEvents.SUBSTATION_SEARCH;
+      await ctx.reply('Для поиска "девайса" введите имя:');
+      ctx.session.mainEvent = mainEvents.DEVICES_SEARCH;
       return;
     }
   }

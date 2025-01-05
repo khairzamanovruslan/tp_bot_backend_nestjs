@@ -9,7 +9,10 @@ import { mainEvents } from '../types/types';
 export interface Context extends ContextTelegraf {
   session: {
     mainEvent?: mainEvents;
-    substation_name_value: string;
+    device_name_value: string;
+    device_latitude_value: string;
+    device_longitude_value: string;
+    device_type_object_id: number | null;
     /* scenes: {
       activeSceneId: string;
     }; */

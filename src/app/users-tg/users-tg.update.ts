@@ -68,7 +68,7 @@ export class UsersTgUpdate {
     await ctx.reply(
       `Список пользователей:\n${textUsers}Всего: ${usersTg.length}`,
     );
-    await ctx.reply('Для поиска ТП введите номер:');
+    await ctx.reply('Для поиска "девайса" введите имя:');
     //Логи для разработчика
     await Log.command(ctx, id_tg, mainCommands.USERS_TG_REPORT);
     return;
@@ -89,7 +89,7 @@ export class UsersTgUpdate {
     const delay = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
     await ctx.reply(
-      `Список пользователей (права доступа)\nПроцесс займет около ${usersTg.length} (сек)\nВсего: ${usersTg.length} сотрудника (-ов)`,
+      `Список пользователей (права доступа)\nВсего: ${usersTg.length} сотрудник (-ов)`,
     );
     async function handlerUsersAccess(usersTg) {
       let count = 0;
@@ -97,23 +97,26 @@ export class UsersTgUpdate {
         const textAccess = `№ п.п: ${count + 1}
 id_tg: ${user.id_tg}
 full_name: ${user.full_name}
-tp_search: ${Boolean(user.access.tp_search)}
-tp_report: ${Boolean(user.access.tp_report)}
-tp_add: ${Boolean(user.access.tp_add)}
-tp_delete: ${Boolean(user.access.tp_delete)}
-users_report: ${Boolean(user.access.users_report)}
-user_add: ${Boolean(user.access.user_add)}
-user_delete: ${Boolean(user.access.user_delete)}
-users_access_report: ${Boolean(user.access.users_access_report)}
-notifications_users_tg_all: ${Boolean(user.access.notifications_users_tg_all)}
-help: ${Boolean(user.access.help)}\n\n`;
+${Boolean(user.access.devices_search) ? `✅` : '❌'}: devices_search
+${Boolean(user.access.devices_report) ? `✅` : '❌'}: devices_report
+${Boolean(user.access.device_add) ? `✅` : '❌'}: device_add
+${Boolean(user.access.device_update) ? `✅` : '❌'}: device_update
+${Boolean(user.access.device_delete) ? `✅` : '❌'}: device_delete
+${Boolean(user.access.users_report) ? `✅` : '❌'}: users_report
+${Boolean(user.access.user_add) ? `✅` : '❌'}: user_add
+${Boolean(user.access.user_delete) ? `✅` : '❌'}: user_delete
+${Boolean(user.access.users_access_report) ? `✅` : '❌'}: users_access_report
+${
+  Boolean(user.access.notifications_users_tg_all) ? `✅` : '❌'
+}: notifications_users_tg_all
+${Boolean(user.access.help) ? `✅` : '❌'}: help\n\n`;
         await ctx.reply(textAccess);
-        await delay(1000);
+        await delay(0);
         count++;
       }
     }
     await handlerUsersAccess(usersTg);
-    await ctx.reply('Для поиска ТП введите номер:');
+    await ctx.reply('Для поиска "девайса" введите имя:');
     //Логи для разработчика
     await Log.command(ctx, id_tg, mainCommands.USER_TG_ACCESS);
     return;

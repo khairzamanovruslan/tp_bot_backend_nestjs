@@ -32,7 +32,7 @@ export class UsersTgAddScene {
   @Action(additionalScenesButtons.btnCancel)
   async userTgCancel(@Ctx() ctx: SceneContext) {
     //Основная логика функции
-    await ctx.reply(`Отмена!\nДля поиска ТП введите номер:`);
+    await ctx.reply(`Отмена!\nДля поиска "девайса" введите имя:`);
     await ctx.scene.leave();
     //Логи для разработчика
     const id_tg = String(ctx.update['callback_query']['from']['id']);
@@ -63,9 +63,7 @@ export class UsersTgAddScene {
       );
       return;
     }
-    const userTg = await this.userTgService.createUserTgFromTelegramBot(
-      message,
-    );
+    const userTg = await this.userTgService.createUserTg(message);
 
     if (!userTg) {
       await ctx.reply(
@@ -77,6 +75,7 @@ export class UsersTgAddScene {
     await ctx.reply(
       'Пользователь добавлен!\nТеперь у него есть доступ к боту.',
     );
+    await ctx.reply('Для поиска "девайса" введите имя:');
     ctx.scene.leave();
   }
 }
