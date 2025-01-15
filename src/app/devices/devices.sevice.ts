@@ -32,7 +32,6 @@ export class DevicesService {
       order: [['id', 'DESC']],
       limit: 1,
     });
-    console.log('data', data);
     if (data.length === 0) {
       return 0;
     }
@@ -94,7 +93,6 @@ export class DevicesService {
       order: [['name', 'DESC']],
       include: Devices,
     });
-    console.log('typeObject', typeObject);
     return typeObject;
   }
 }

@@ -82,8 +82,13 @@ export class DevicesUpdate {
       for (const item of data) {
         const listDevicesData = item.dataValues.devices;
         const listDevices = listDevicesData.map((i) => i.name);
+        const compareFn = (a, b) =>
+          a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+        const listDevicesFilter = listDevices.sort(compareFn);
         const prepearListDevice =
-          listDevices.length !== 0 ? `\n${listDevices.join(', ')}` : '';
+          listDevicesFilter.length !== 0
+            ? `\n${listDevicesFilter.join(', ')}`
+            : '';
         const res = `Список ${item.name}: ${prepearListDevice}\n\nВсего: ${item.dataValues.devices.length}\n\n`;
         await ctx.reply(res);
         await delay(0);
