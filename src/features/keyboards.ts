@@ -15,4 +15,18 @@ async function dynamicKeyboardInlineTypeObject(btns) {
   return keyboard;
 }
 
-export { kbBtnCancel, dynamicKeyboardInlineTypeObject };
+async function dynamicKeyboardInlineDevicesPC(btns) {
+  const keyboard = btns.map((item: { name: string; id: number }) => {
+    return [Markup.button.callback(item.name, `devicepsid-${item.id}`)];
+  });
+  keyboard.push([
+    Markup.button.callback('Отмена', additionalScenesButtons.btnCancel),
+  ]);
+  return keyboard;
+}
+
+export {
+  kbBtnCancel,
+  dynamicKeyboardInlineTypeObject,
+  dynamicKeyboardInlineDevicesPC,
+};

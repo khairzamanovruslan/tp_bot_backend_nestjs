@@ -7,6 +7,7 @@ export enum mainEvents {
 
 export enum mainCommands {
   DEVICES_REPORT = 'report',
+  DEVICES_REPORT_PC = 'report_pc',
   DEVICE_ADD = 'add_device',
   DEVICE_DELETE = 'delete_device',
   DEVICE_UPDATE = 'update_device',
@@ -23,6 +24,7 @@ export enum defaultCommands {
 export enum mainScenes {
   USER_TG_ADD_SCENE = 'user_tg_add_scene',
   USER_TG_DELETE_SCENE = 'user_tg_delete_scene',
+  DEVICES_REPORT_PC_SCENE = 'devices_report_pc_scene',
   DEVICE_ADD_SCENE = 'device_add_scene',
   DEVICE_DELETE_SCENE = 'device_delete_scene',
   DEVICE_UPDATE_SCENE = 'device_update_scene',

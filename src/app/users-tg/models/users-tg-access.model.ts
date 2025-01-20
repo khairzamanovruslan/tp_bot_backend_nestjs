@@ -29,6 +29,9 @@ export class UsersTgAccess extends Model<UsersTgAccess> {
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
   devices_report: boolean;
 
+  @Column({ type: DataType.BOOLEAN, defaultValue: true })
+  devices_report_pc: boolean;
+
   @Column({ type: DataType.BOOLEAN, defaultValue: false })
   device_add: boolean;
 

@@ -27,6 +27,13 @@ export class DevicesService {
     });
     return device;
   }
+
+  async getOneById(id: number) {
+    const device = await this.devicesRepository.findOne({
+      where: { id: { [Op.eq]: id } },
+    });
+    return device;
+  }
   async getLastPrimaryKeyTp() {
     const data = await this.devicesRepository.findAll({
       order: [['id', 'DESC']],
@@ -105,6 +112,13 @@ export class DevicesService {
   async getTypeObjectById(id: number) {
     const typeObject = await this.deviceTypeObjectRepository.findOne({
       where: { id: { [Op.eq]: id } },
+    });
+    return typeObject;
+  }
+  async getDevicesTypesObjectPC(id: number) {
+    const typeObject = await this.deviceTypeObjectRepository.findOne({
+      where: { id: { [Op.eq]: id } },
+      include: Devices,
     });
     return typeObject;
   }

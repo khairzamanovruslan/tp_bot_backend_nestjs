@@ -73,7 +73,7 @@ export class DevicesUpdate {
       await ctx.reply('Вам отказано в доступе!');
       return;
     }
-
+    //Основная логика функции
     const devicesList =
       await this.devicesService.getAllTypesObjectWithDevices();
     const delay = (ms: number) =>
@@ -99,6 +99,22 @@ export class DevicesUpdate {
     await ctx.reply('Для поиска "девайса" введите имя:');
     //Логи для разработчика
     await Log.command(ctx, id_tg, mainCommands.DEVICES_REPORT);
+    return;
+  }
+
+  @Command(mainCommands.DEVICES_REPORT_PC)
+  async devicesReportPC(@Ctx() ctx: SceneContext) {
+    const id_tg = String(ctx.update['message']['from']['id']);
+    //Проверка пользователя
+    const user = await this.usersTgService.getOneUserTgAndAccess(id_tg);
+    if (!user || !user.access.devices_report_pc) {
+      await ctx.reply('Вам отказано в доступе!');
+      return;
+    }
+    //Основная логика функции
+    await ctx.scene.enter(mainScenes.DEVICES_REPORT_PC_SCENE);
+    //Логи для разработчика
+    await Log.command(ctx, id_tg, mainCommands.DEVICES_REPORT_PC);
     return;
   }
 }

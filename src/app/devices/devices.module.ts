@@ -9,6 +9,7 @@ import { DevicesAddScene } from './scenes/devices-add.scene';
 import { UsersTgModule } from '../users-tg/users-tg.module';
 import { DevicesUpdateScene } from './scenes/devices-update.scene';
 import { DeviceTypeObject } from './models/devices-type-object.model';
+import { DevicesReportPcScene } from './scenes/devices-report-pc.scene';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { DeviceTypeObject } from './models/devices-type-object.model';
     DevicesAddScene,
     DevicesDeleteScene,
     DevicesUpdateScene,
+    DevicesReportPcScene,
   ],
   exports: [DevicesService],
 })

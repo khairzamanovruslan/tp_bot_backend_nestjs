@@ -6,6 +6,10 @@ import { MainService } from './main.service';
 import { DevicesService } from '../devices/devices.sevice';
 import { mainEvents } from '../../types/types';
 import { UsersTgService } from '../users-tg/users-tg.sevice';
+import {
+  linkToYandexMapsAnswer,
+  coordinateAnswer,
+} from '../../features/coordinates';
 
 const Log = new Logs();
 
@@ -32,20 +36,21 @@ export class MainUpdate {
     //Основная логика функции
     if (!ctx.session.mainEvent) return;
     if (ctx.session.mainEvent === mainEvents.DEVICES_SEARCH) {
-      const substation = await this.devicesService.getOneByName(message);
-      if (!substation) {
+      const device = await this.devicesService.getOneByName(message);
+      if (!device) {
         await ctx.reply(`Не найдено!\nДля поиска "девайса" введите имя:`);
         return;
       }
-      const latitude = substation.latitude;
-      const longitude = substation.longitude;
+      const latitude = device.latitude;
+      const longitude = device.longitude;
       if (!latitude) {
         await ctx.reply('Координата не обнаружена!');
         return;
       }
-      const linkForUser = `https://yandex.ru/maps/?pt=${longitude},${latitude}&z=18&l=map`;
-      await ctx.reply(`${latitude},${longitude}`);
-      await ctx.reply(linkForUser);
+      const link = linkToYandexMapsAnswer(latitude, longitude);
+      const coordinate = coordinateAnswer(latitude, longitude);
+      await ctx.reply(coordinate);
+      await ctx.reply(link);
       await ctx.reply('Для поиска "девайса" введите имя:');
       ctx.session.mainEvent = mainEvents.DEVICES_SEARCH;
       return;

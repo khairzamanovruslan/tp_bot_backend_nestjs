@@ -45,6 +45,7 @@ export class AppUpdate {
     //Основная логика функции
     const text = `Все команды:\n
 /${mainCommands.DEVICES_REPORT} - список всех "девайсов"
+/${mainCommands.DEVICES_REPORT_PC} - список ПС"
 /${mainCommands.DEVICE_ADD} - добавить "девайс"
 /${mainCommands.DEVICE_UPDATE} - обновить "девайс"
 /${mainCommands.DEVICE_DELETE} - удалить "девайс"\n 

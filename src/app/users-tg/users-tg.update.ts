@@ -89,7 +89,7 @@ export class UsersTgUpdate {
     const delay = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
     await ctx.reply(
-      `Список пользователей (права доступа)\nВсего: ${usersTg.length} сотрудник (-ов)`,
+      `Список пользователей (права доступа)\nВсего: ${usersTg.length} сотрудника (-ов)`,
     );
     async function handlerUsersAccess(usersTg) {
       let count = 0;
@@ -99,6 +99,7 @@ id_tg: ${user.id_tg}
 full_name: ${user.full_name}
 ${Boolean(user.access.devices_search) ? `✅` : '❌'}: devices_search
 ${Boolean(user.access.devices_report) ? `✅` : '❌'}: devices_report
+${Boolean(user.access.devices_report_pc) ? `✅` : '❌'}: devices_report_pc
 ${Boolean(user.access.device_add) ? `✅` : '❌'}: device_add
 ${Boolean(user.access.device_update) ? `✅` : '❌'}: device_update
 ${Boolean(user.access.device_delete) ? `✅` : '❌'}: device_delete
