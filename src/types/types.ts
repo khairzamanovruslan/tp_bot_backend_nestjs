@@ -30,20 +30,4 @@ export enum mainScenes {
 }
 export enum additionalScenesButtons {
   btnCancel = 'btn_cancel',
-  btnTypeObject = 'btn_type_object',
 }
-
-export interface buttonsTypeObjectType {
-  id: number;
-  name: string;
-  type: string;
-}
-
-/* ЭТИ ДАННЫЕ ДОЛЖНЫ БЫТЬ В БД! */
-export const buttonsTypeObject: Array<buttonsTypeObjectType> = [
-  { id: 1, name: 'ТП', type: 'type_object_tp' },
-  { id: 2, name: 'РП', type: 'type_object_rp' },
-  { id: 3, name: 'ПС', type: 'type_object_ps' },
-  { id: 4, name: 'Реклоузер', type: 'type_object_rekloyzer' },
-  { id: 5, name: 'Разъединитель', type: 'type_object_razedinitel' },
-];

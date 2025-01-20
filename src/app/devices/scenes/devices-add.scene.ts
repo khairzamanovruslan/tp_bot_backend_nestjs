@@ -16,7 +16,6 @@ import {
   additionalScenesButtons,
   mainEvents,
   mainScenes,
-  buttonsTypeObject,
 } from '../../../types/types';
 import {
   kbBtnCancel,
@@ -112,11 +111,13 @@ export class DevicesAddScene {
         return;
       }
       ctx.session.device_name_value = message;
-      const typeDevice = buttonsTypeObject.filter((item) => {
-        return item.id === ctx.session.device_type_object_id;
-      })[0];
+      const typeObjectData = await this.devicesService.getTypeObjectById(
+        ctx.session.device_type_object_id,
+      );
+      const typeObject = typeObjectData.dataValues;
+      console.log('typeObjectData', typeObject.name);
       await ctx.reply(
-        `Отлично!\nТип: ${typeDevice.name}\nИмя: ${message}\nФормат координат: 57.042185,60.504975\n\nТеперь введите координаты:`,
+        `Отлично!\nТип: ${typeObject.name}\nИмя: ${message}\nФормат координат: 57.042185,60.504975\n\nТеперь введите координаты:`,
         kbBtnCancel,
       );
       ctx.session.mainEvent = mainEvents.DEVICE_COORDINATES;

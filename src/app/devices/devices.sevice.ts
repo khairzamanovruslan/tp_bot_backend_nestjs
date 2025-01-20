@@ -102,4 +102,10 @@ export class DevicesService {
     });
     return typeObject;
   }
+  async getTypeObjectById(id: number) {
+    const typeObject = await this.deviceTypeObjectRepository.findOne({
+      where: { id: { [Op.eq]: id } },
+    });
+    return typeObject;
+  }
 }
