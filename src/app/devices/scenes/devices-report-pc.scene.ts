@@ -72,6 +72,7 @@ export class DevicesReportPcScene {
     await ctx.reply(name);
     await ctx.reply(coordinate);
     await ctx.reply(link);
+    await ctx.reply('Для поиска "девайса" введите имя:');
     ctxScene.scene.leave();
     //Логи для разработчика
     const id_tg = String(ctxScene.update['callback_query']['from']['id']);
