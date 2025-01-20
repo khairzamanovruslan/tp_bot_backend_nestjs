@@ -20,7 +20,7 @@ import {
 } from '../../../types/types';
 import {
   kbBtnCancel,
-  keyboardInlineTypeObject,
+  dynamicKeyboardInlineTypeObject,
 } from '../../../features/keyboards';
 import { Context } from '../../../context/context.interface';
 import { countOccurrences } from '../utils/checking-string-for-char';
@@ -39,8 +39,10 @@ export class DevicesAddScene {
     ctx.session.device_latitude_value = '';
     ctx.session.device_longitude_value = '';
     ctx.session.device_type_object_id = null;
-    const keyboardTypeObject = await keyboardInlineTypeObject(
-      buttonsTypeObject,
+    const typeObjectData = await this.devicesService.getAllTypesObject();
+    const typeObjectList = typeObjectData.map((i) => i.dataValues);
+    const keyboardTypeObject = await dynamicKeyboardInlineTypeObject(
+      typeObjectList,
     );
     await ctx.reply(
       `Создание "девайса"!\nВыберите тип объекта:`,
@@ -65,78 +67,19 @@ export class DevicesAddScene {
     return;
   }
 
-  @Action(buttonsTypeObject[0].type)
-  async HandlerTypeObjectTP(
+  @Action(/^typeobjectid+(-[0-9]+)?$/)
+  async DynamicKeyboardTypeObjectHandler(
     @Ctx() ctxScene: SceneContext,
     @Ctx() ctx: Context,
   ) {
     //Основная логика функции
     await ctxScene.reply('Введите уникальное имя "девайса":', kbBtnCancel);
-    ctx.session.device_type_object_id = buttonsTypeObject[0].id;
-    ctx.session.mainEvent = mainEvents.DEVICE_NAME;
-
-    //Логи для разработчика
-    const id_tg = String(ctxScene.update['callback_query']['from']['id']);
-    await Log.command(ctxScene, id_tg, buttonsTypeObject[0].type);
-    return;
-  }
-
-  @Action(buttonsTypeObject[1].type)
-  async HandlerTypeObjectRP(
-    @Ctx() ctxScene: SceneContext,
-    @Ctx() ctx: Context,
-  ) {
-    //Основная логика функции
-    await ctxScene.reply('Введите уникальное имя "девайса":', kbBtnCancel);
-    ctx.session.device_type_object_id = buttonsTypeObject[1].id;
+    const typeObjectId = Number(ctx['match'][1].split('-')[1]);
+    ctx.session.device_type_object_id = typeObjectId;
     ctx.session.mainEvent = mainEvents.DEVICE_NAME;
     //Логи для разработчика
     const id_tg = String(ctxScene.update['callback_query']['from']['id']);
-    await Log.command(ctxScene, id_tg, buttonsTypeObject[1].type);
-    return;
-  }
-
-  @Action(buttonsTypeObject[2].type)
-  async HandlerTypeObjectPS(
-    @Ctx() ctxScene: SceneContext,
-    @Ctx() ctx: Context,
-  ) {
-    //Основная логика функции
-    await ctxScene.reply('Введите уникальное имя "девайса":', kbBtnCancel);
-    ctx.session.device_type_object_id = buttonsTypeObject[2].id;
-    ctx.session.mainEvent = mainEvents.DEVICE_NAME;
-    //Логи для разработчика
-    const id_tg = String(ctxScene.update['callback_query']['from']['id']);
-    await Log.command(ctxScene, id_tg, buttonsTypeObject[2].type);
-    return;
-  }
-  @Action(buttonsTypeObject[3].type)
-  async HandlerTypeObjectRekloyzer(
-    @Ctx() ctxScene: SceneContext,
-    @Ctx() ctx: Context,
-  ) {
-    //Основная логика функции
-    await ctxScene.reply('Введите уникальное имя "девайса":', kbBtnCancel);
-    ctx.session.device_type_object_id = buttonsTypeObject[3].id;
-    ctx.session.mainEvent = mainEvents.DEVICE_NAME;
-    //Логи для разработчика
-    const id_tg = String(ctxScene.update['callback_query']['from']['id']);
-    await Log.command(ctxScene, id_tg, buttonsTypeObject[3].type);
-    return;
-  }
-
-  @Action(buttonsTypeObject[4].type)
-  async HandlerTypeObjectRazedinitel(
-    @Ctx() ctxScene: SceneContext,
-    @Ctx() ctx: Context,
-  ) {
-    //Основная логика функции
-    await ctxScene.reply('Введите уникальное имя "девайса":', kbBtnCancel);
-    ctx.session.device_type_object_id = buttonsTypeObject[4].id;
-    ctx.session.mainEvent = mainEvents.DEVICE_NAME;
-    //Логи для разработчика
-    const id_tg = String(ctxScene.update['callback_query']['from']['id']);
-    await Log.command(ctxScene, id_tg, buttonsTypeObject[4].type);
+    await Log.command(ctxScene, id_tg, `typeobject-${typeObjectId}`);
     return;
   }
 
@@ -232,8 +175,11 @@ export class DevicesAddScene {
       return;
     }
     if (ctx.session.mainEvent === mainEvents.DEVICE_TYPE_OBJECT) {
-      const keyboardTypeObject = await keyboardInlineTypeObject(
-        buttonsTypeObject,
+      // получить typeObject из БД
+      const typeObjectData = await this.devicesService.getAllTypesObject();
+      const typeObjectList = typeObjectData.map((i) => i.dataValues);
+      const keyboardTypeObject = await dynamicKeyboardInlineTypeObject(
+        typeObjectList,
       );
       await ctx.reply(
         `Дружище, выберити тип объекта:`,

@@ -5,9 +5,9 @@ const kbBtnCancel = Markup.inlineKeyboard([
   Markup.button.callback('Отмена', additionalScenesButtons.btnCancel),
 ]);
 
-async function keyboardInlineTypeObject(btns) {
-  const keyboard = btns.map((item: { name: string; type: string }) => {
-    return [Markup.button.callback(item.name, item.type)];
+async function dynamicKeyboardInlineTypeObject(btns) {
+  const keyboard = btns.map((item: { name: string; id: number }) => {
+    return [Markup.button.callback(item.name, `typeobjectid-${item.id}`)];
   });
   keyboard.push([
     Markup.button.callback('Отмена', additionalScenesButtons.btnCancel),
@@ -15,4 +15,4 @@ async function keyboardInlineTypeObject(btns) {
   return keyboard;
 }
 
-export { kbBtnCancel, keyboardInlineTypeObject };
+export { kbBtnCancel, dynamicKeyboardInlineTypeObject };

@@ -95,4 +95,11 @@ export class DevicesService {
     });
     return typeObject;
   }
+
+  async getAllTypesObject() {
+    const typeObject = await this.deviceTypeObjectRepository.findAll({
+      order: [['id', 'ASC']],
+    });
+    return typeObject;
+  }
 }
