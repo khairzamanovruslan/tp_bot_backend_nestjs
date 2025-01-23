@@ -20,7 +20,8 @@ export class RolesController {
   })
   @Post()
   create(@Body() dto: CreateRoleDto) {
-    return this.rolesService.createRole(dto);
+    /* return this.rolesService.createRole(dto); */
+    return 'Добавить новую роль';
   }
 
   @ApiOperation({
@@ -35,7 +36,8 @@ export class RolesController {
   @ApiParam({ name: 'value', required: true, description: 'Название роли' })
   @Get(':value')
   getByValue(@Param('value') value: string) {
-    return this.rolesService.getRoleByValue(value);
+    /*  return this.rolesService.getRoleByValue(value); */
+    return 'Поиск роли';
   }
 
   @ApiOperation({
@@ -49,6 +51,7 @@ export class RolesController {
   })
   @Get()
   getAllRoles() {
-    return this.rolesService.getAllRoles();
+    /* return this.rolesService.getAllRoles(); */
+    return 'Поиск всех ролей';
   }
 }

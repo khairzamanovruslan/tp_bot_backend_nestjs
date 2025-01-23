@@ -28,7 +28,8 @@ export class UsersTgController {
   })
   @Get('access')
   async getAllUsersAndAccess() {
-    return this.usersTgService.getAllUsersTgAndAccess();
+    /* return this.usersTgService.getAllUsersTgAndAccess(); */
+    return 'Поиск всех пользователей (с правами доступа)';
   }
 
   @ApiOperation({
@@ -42,7 +43,8 @@ export class UsersTgController {
   })
   @Get()
   async getAllUsers() {
-    return this.usersTgService.getAllUsersTg();
+    /*  return this.usersTgService.getAllUsersTg(); */
+    return 'Поиск всех пользователей';
   }
 
   @ApiOperation({
@@ -56,7 +58,8 @@ export class UsersTgController {
   })
   @Get('/:id_tg')
   async getUser(@Param('id_tg') id_tg: string) {
-    return this.usersTgService.getOneUserTgAndAccess(id_tg);
+    /* return this.usersTgService.getOneUserTgAndAccess(id_tg); */
+    return 'Поиск пользователя (с правами доступа)';
   }
 
   @ApiOperation({
@@ -70,7 +73,8 @@ export class UsersTgController {
   })
   @Post()
   async createUser(@Body() userTgDto: CreateUserTgDto) {
-    return this.usersTgService.createUserTgFromWeb(userTgDto);
+    /* return this.usersTgService.createUserTgFromWeb(userTgDto); */
+    return 'Добавить нового пользователя';
   }
 
   @ApiOperation({
@@ -90,6 +94,6 @@ export class UsersTgController {
   @Delete('/:id_tg')
   async delete(@Param('id_tg') id_tg: string) {
     /* return this.usersTgService.delete(id_tg); */
-    return 'Будем считать что данные удалены!';
+    return 'Удалить пользователя';
   }
 }

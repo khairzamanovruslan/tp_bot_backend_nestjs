@@ -20,7 +20,8 @@ export class UsersController {
   })
   @Post()
   async createUser(@Body() userDto: CreateUserDto) {
-    return this.usersService.createUser(userDto);
+    /* return this.usersService.createUser(userDto); */
+    return 'Добавить нового пользователя';
   }
 
   @ApiOperation({
@@ -34,6 +35,7 @@ export class UsersController {
   })
   @Get()
   getAllUsers() {
-    return this.usersService.getAll();
+    /* return this.usersService.getAll(); */
+    return 'Поиск всех пользователей';
   }
 }

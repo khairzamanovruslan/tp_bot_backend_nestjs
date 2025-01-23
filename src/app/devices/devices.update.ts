@@ -76,6 +76,14 @@ export class DevicesUpdate {
     //Основная логика функции
     const devicesList =
       await this.devicesService.getAllTypesObjectWithDevices();
+    const devicesListFilter = devicesList.filter((item) => {
+      if (
+        item.dataValues.name !== 'Разъединитель' &&
+        item.dataValues.name !== 'Реклоузер'
+      ) {
+        return item;
+      }
+    });
     const delay = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
     async function handlerDevices(data) {
@@ -94,7 +102,7 @@ export class DevicesUpdate {
         await delay(0);
       }
     }
-    await handlerDevices(devicesList);
+    await handlerDevices(devicesListFilter);
 
     await ctx.reply('Для поиска "девайса" введите имя:');
     //Логи для разработчика

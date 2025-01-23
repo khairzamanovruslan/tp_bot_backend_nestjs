@@ -10,6 +10,7 @@ export class MainController {
   @ApiExcludeEndpoint()
   @Get()
   main(): string {
-    return this.mainService.main();
+    /* return this.mainService.main(); */
+    return 'Главная';
   }
 }

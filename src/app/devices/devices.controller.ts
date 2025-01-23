@@ -30,7 +30,8 @@ export class DevicesController {
   })
   @Get()
   getAllTypesObjectWithDevices() {
-    return this.devicesService.getAllTypesObjectWithDevices();
+    /* return this.devicesService.getAllTypesObjectWithDevices(); */
+    return 'Поиск "девайстов"';
   }
 
   @ApiOperation({
@@ -45,7 +46,8 @@ export class DevicesController {
   @ApiParam({ name: 'name', required: true, description: 'Имя "девайса"' })
   @Get('/:name')
   getDeviceOne(@Param('name') name: string) {
-    return this.devicesService.getOneByName(name);
+    /* return this.devicesService.getOneByName(name); */
+    return 'Поиск "девайса" по имени';
   }
 
   @ApiOperation({
@@ -59,7 +61,8 @@ export class DevicesController {
   })
   @Post()
   async createDevice(@Body() deviceDto: CreateDeviceDto) {
-    return this.devicesService.createDevice(deviceDto);
+    /* return this.devicesService.createDevice(deviceDto); */
+    return 'Добавить "девайс"';
   }
 
   @ApiOperation({
@@ -75,7 +78,7 @@ export class DevicesController {
   @Delete('/:name')
   async deleteDevice(@Param('name') name: string) {
     /* return this.devicesService.deleteDevice(name); */
-    return 'Будем считать что данные удалены!';
+    return 'Удалить "девайс" по имени';
   }
 
   @ApiOperation({
@@ -94,6 +97,6 @@ export class DevicesController {
     @Param('name') name: string,
   ) {
     /* return this.devicesService.updateDevice(name, deviceDto); */
-    return 'Будем считать что данные обновилены!';
+    return 'Обновить "девайс" по имени';
   }
 }
