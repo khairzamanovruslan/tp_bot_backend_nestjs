@@ -48,12 +48,13 @@ export class AppUpdate {
 /${mainCommands.DEVICES_REPORT_PC} - список ПС"
 /${mainCommands.DEVICE_ADD} - добавить "девайс"
 /${mainCommands.DEVICE_UPDATE} - обновить "девайс"
-/${mainCommands.DEVICE_DELETE} - удалить "девайс"\n 
+/${mainCommands.DEVICE_DELETE} - удалить "девайс"\n
 /${mainCommands.USERS_TG_REPORT} - список пользователей
 /${mainCommands.USER_TG_ADD} - добавить пользователя
 /${mainCommands.USER_TG_DELETE} - удалить пользователя
 /${mainCommands.USER_TG_ACCESS} - список пользователей (с правами)\n
-/${mainCommands.NOTIFICATIONS_USERS_TG_ALL} - отправить уведомление всем пользователям`;
+/${mainCommands.NOTIFICATIONS_USERS_TG_ALL} - отправить уведомление всем пользователям\n
+/${mainCommands.BACKUP} - бэкап`;
     await ctx.reply(text);
     //Логи для разработчика
     await Log.command(ctx, id_tg, defaultCommands.HELP);

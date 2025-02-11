@@ -110,6 +110,7 @@ ${Boolean(user.access.users_access_report) ? `✅` : '❌'}: users_access_report
 ${
   Boolean(user.access.notifications_users_tg_all) ? `✅` : '❌'
 }: notifications_users_tg_all
+${Boolean(user.access.backup) ? `✅` : '❌'}: backup
 ${Boolean(user.access.help) ? `✅` : '❌'}: help\n\n`;
         await ctx.reply(textAccess);
         await delay(0);

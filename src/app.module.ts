@@ -10,6 +10,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './app/users/users.module';
 import { RolesModule } from './app/roles/roles.module';
 import { NotificationsModule } from './app/notifications/notifications.module';
+import { BackupModule } from './app/backup/backup.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { NotificationsModule } from './app/notifications/notifications.module';
     UsersModule,
     RolesModule,
     NotificationsModule,
+    BackupModule,
     MainModule,
   ],
   controllers: [],

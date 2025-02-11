@@ -16,6 +16,7 @@ export enum mainCommands {
   USER_TG_DELETE = 'delete_user',
   USER_TG_ACCESS = 'report_users_access',
   NOTIFICATIONS_USERS_TG_ALL = 'notifications_users_tg_all',
+  BACKUP = 'backup',
 }
 export enum defaultCommands {
   START = 'start',

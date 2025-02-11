@@ -1,25 +1,3 @@
 {
-  "sessions": [
-    {
-      "id": "698484110:698484110",
-      "data": {
-        "__scenes": {},
-        "mainEvent": "devices-search",
-        "device_name_value": "",
-        "device_latitude_value": "",
-        "device_longitude_value": "",
-        "device_type_object_id": null
-      }
-    },
-    {
-      "id": "236649078:236649078",
-      "data": {
-        "__scenes": {},
-        "mainEvent": "devices-search",
-        "device_name_value": "",
-        "device_latitude_value": "",
-        "device_longitude_value": ""
-      }
-    }
-  ]
+  "sessions": []
 }

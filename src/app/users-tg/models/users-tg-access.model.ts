@@ -59,6 +59,9 @@ export class UsersTgAccess extends Model<UsersTgAccess> {
   @Column({ type: DataType.BOOLEAN, defaultValue: false })
   notifications_users_tg_all: boolean;
 
+  @Column({ type: DataType.BOOLEAN, defaultValue: false })
+  backup: boolean;
+
   @BelongsTo(() => UsersTg)
   user_tg: UsersTg;
 
