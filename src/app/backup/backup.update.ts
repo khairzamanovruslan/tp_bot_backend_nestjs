@@ -51,8 +51,12 @@ export class BackupUpdate {
     await handler(usersTg, 'users_tg');
     const usersTgAccess = await this.backupService.getAllUsersTgAccess();
     await handler(usersTgAccess, 'users_tg_access');
-    const date = new Date().toLocaleDateString();
-    const fileName = `${date}_${devices.length}_${usersTg.length}.xlsx`;
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+    const currentDate = `${year}.${month + 1}.${day}`;
+    const fileName = `${currentDate}_${devices.length}_${usersTg.length}.xlsx`;
     const pathShare = path.resolve(process.env.SHARE, fileName);
     await workbook.xlsx.writeFile(pathShare);
     await ctx.replyWithDocument({ source: pathShare, filename: fileName });
