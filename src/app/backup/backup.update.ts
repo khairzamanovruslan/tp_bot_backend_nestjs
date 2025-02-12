@@ -31,7 +31,6 @@ export class BackupUpdate {
     await ctx.reply('Файл формируется, ожидайте...');
     const workbook = new Excel.Workbook();
     const handler = async (data, nameWorksheet: string) => {
-      console.log('BACKUP');
       const worksheet = workbook.addWorksheet(nameWorksheet);
       if (data.length <= 0) {
         return false;
