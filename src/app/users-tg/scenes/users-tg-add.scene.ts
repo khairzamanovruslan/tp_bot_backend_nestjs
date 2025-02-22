@@ -45,9 +45,6 @@ export class UsersTgAddScene {
     @Next() next: () => ParameterDecorator,
     @Message('text') message: string,
   ) {
-    //Логи для разработчика
-    const id_tg = String(ctx.update['message']['from']['id']);
-    await Log.message(ctx, id_tg, message);
     //Основная логика функции
     if (message[0] === '/') {
       await ctx.reply(
@@ -77,5 +74,8 @@ export class UsersTgAddScene {
     );
     await ctx.reply('Для поиска "девайса" введите имя:');
     ctx.scene.leave();
+    //Логи для разработчика
+    const id_tg = String(ctx.update['message']['from']['id']);
+    await Log.message(ctx, id_tg, message);
   }
 }
