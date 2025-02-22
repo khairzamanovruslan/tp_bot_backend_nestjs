@@ -16,19 +16,27 @@ export class BackupService {
     private deviceTypeObject: typeof DeviceTypeObject,
   ) {}
   async getAllUsersTg() {
-    const usersTg = await this.usersTgRepository.findAll();
+    const usersTg = await this.usersTgRepository.findAll({
+      order: [['id', 'ASC']],
+    });
     return usersTg;
   }
   async getAllUsersTgAccess() {
-    const usersTgAccess = await this.usersTgAccessRepository.findAll();
+    const usersTgAccess = await this.usersTgAccessRepository.findAll({
+      order: [['id', 'ASC']],
+    });
     return usersTgAccess;
   }
   async getAllDevices() {
-    const devices = await this.devicesRepository.findAll();
+    const devices = await this.devicesRepository.findAll({
+      order: [['id', 'ASC']],
+    });
     return devices;
   }
   async getAllDevicesTypeObject() {
-    const devicesTypeObject = await this.deviceTypeObject.findAll();
+    const devicesTypeObject = await this.deviceTypeObject.findAll({
+      order: [['id', 'ASC']],
+    });
     return devicesTypeObject;
   }
 }
