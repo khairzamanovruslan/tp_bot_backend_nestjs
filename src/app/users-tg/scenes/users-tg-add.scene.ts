@@ -61,7 +61,7 @@ export class UsersTgAddScene {
       return;
     }
     const userTg = await this.userTgService.createUserTg(message);
-
+    console.log('!!!!!!!!!', userTg);
     if (!userTg) {
       await ctx.reply(
         `Ошибка!\nТакой пользователь уже существует!\nВведите другой id пользователя:`,

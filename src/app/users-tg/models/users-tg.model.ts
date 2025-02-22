@@ -3,6 +3,7 @@ import { UsersTgAccess } from './users-tg-access.model';
 import { ApiProperty } from '@nestjs/swagger';
 
 interface UsersTgAttrs {
+  readonly id: number;
   readonly id_tg: string;
 }
 

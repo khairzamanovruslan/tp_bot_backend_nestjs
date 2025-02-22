@@ -54,8 +54,14 @@ export class UsersTgService {
     if (userTgData) {
       return false;
     }
-    const userTg = await this.usersTgRepository.create({ id_tg });
+    const lastPKUsersTg = await this.getLastPrimaryKeyUsersTg();
+    const userTg = await this.usersTgRepository.create({
+      id: lastPKUsersTg + 1,
+      id_tg: id_tg,
+    });
+    const lastPKUsersTgAccess = await this.getLastPrimaryKeyUsersTgAccess();
     await this.usersTgAccessRepository.create({
+      id: lastPKUsersTgAccess + 1,
       user_tg_id: userTg.id,
     });
     return userTg;
@@ -77,5 +83,27 @@ export class UsersTgService {
       user_tg_id: userTg.id,
     });
     return userTg;
+  }
+  async getLastPrimaryKeyUsersTg() {
+    const data = await this.usersTgRepository.findAll({
+      order: [['id', 'DESC']],
+      limit: 1,
+    });
+    if (data.length === 0) {
+      return 0;
+    }
+    const id = data[0].dataValues.id;
+    return id;
+  }
+  async getLastPrimaryKeyUsersTgAccess() {
+    const data = await this.usersTgAccessRepository.findAll({
+      order: [['id', 'DESC']],
+      limit: 1,
+    });
+    if (data.length === 0) {
+      return 0;
+    }
+    const id = data[0].dataValues.id;
+    return id;
   }
 }
